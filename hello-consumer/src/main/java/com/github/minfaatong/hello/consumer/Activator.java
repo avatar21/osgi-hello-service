@@ -29,8 +29,6 @@ public class Activator implements BundleActivator {
 
             @Override
             public void removedService(ServiceReference reference, HelloWorldService service) {
-                super.removedService(reference, service);
-
                 consumerServiceRegistration.unregister();
             }
         };
