@@ -1,6 +1,6 @@
-package com.github.minfaatong.osgi.consumer;
+package com.github.minfaatong.hello.consumer;
 
-import com.github.minfaatong.osgi.service.HelloWorldService;
+import com.github.minfaatong.hello.service.HelloWorldService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -13,25 +13,25 @@ public class Activator implements BundleActivator {
     private ServiceRegistration consumerServiceRegistration;
 
     @Override
-    public void start(BundleContext bundleContext) throws Exception {
+    public void start(final BundleContext bundleContext) throws Exception {
         helloServiceTracker = new ServiceTracker<HelloWorldService, HelloWorldService>(bundleContext, HelloWorldService.class, null) {
 
             @Override
-            public HelloWorldService addingService(ServiceReference<HelloWorldService> serviceReference) {
-                HelloWorldService helloService = bundleContext.getService(serviceReference);
+            public HelloWorldService addingService(ServiceReference serviceReference) {
+                HelloWorldService helloService = (HelloWorldService) bundleContext.getService(serviceReference);
 
                 HelloWorldConsumer consumer = new HelloWorldConsumer(helloService);
                 consumer.sayHello("Alan","Woo");
-                consumerServiceRegistration = bundleContext.registerService(HelloWorldConsumer.class, consumer, null);
+                consumerServiceRegistration = bundleContext.registerService(String.valueOf(HelloWorldConsumer.class), consumer, null);
 
                 return helloService;
             }
 
             @Override
-            public void removedService(ServiceReference<HelloWorldService> reference, HelloWorldService service) {
-                display.destroy();
+            public void removedService(ServiceReference reference, HelloWorldService service) {
+                super.removedService(reference, service);
 
-                clientServiceRegistration.unregister();
+                consumerServiceRegistration.unregister();
             }
         };
 

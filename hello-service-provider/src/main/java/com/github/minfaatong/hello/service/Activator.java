@@ -13,7 +13,7 @@ public class Activator implements BundleActivator {
         // create a booking service impl instance
         HelloWorldService helloService = new HelloWorldServiceImpl();
         // registering the booking service in the service registry
-        serviceRegistration = bundleContext.registerService(HelloWorldService.class, helloService, null);
+        serviceRegistration = bundleContext.registerService(String.valueOf(HelloWorldService.class), helloService, null);
     }
 
     public void stop(BundleContext bundleContext) throws Exception {

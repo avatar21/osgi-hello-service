@@ -6,13 +6,11 @@
 
     <parent>
         <groupId>com.github.minfaatong</groupId>
-        <artifactId>hello-module</artifactId>
+        <artifactId>osgi-hello-module</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>hello-service-provider</artifactId>
-    <version>${parent.version}</version>
     <name>Hello Service Provider</name>
     <packaging>jar</packaging>
 

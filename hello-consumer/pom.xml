@@ -6,13 +6,11 @@
 
     <parent>
         <groupId>com.github.minfaatong</groupId>
-        <artifactId>hello-module</artifactId>
+        <artifactId>osgi-hello-module</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>hello-consumer</artifactId>
-    <version>${parent.version}</version>
     <name>Hello Consumer</name>
     <packaging>jar</packaging>
 
@@ -30,6 +28,10 @@
             <groupId>org.sonatype.sisu</groupId>
             <artifactId>sisu-guice</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.util.tracker</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -37,6 +39,7 @@
         <plugin>
             <groupId>org.apache.felix</groupId>
             <artifactId>maven-bundle-plugin</artifactId>
+            <version>5.1.6</version>
             <configuration>
                     <instructions>
                         <Import-Package>com.github.minfaatong.hello.service</Import-Package>
